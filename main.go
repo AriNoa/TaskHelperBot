@@ -21,6 +21,7 @@ func main() {
 	discordToken := loadToken()
 	session.Token = discordToken
 
+	session.AddHandler(onReady)
 	session.AddHandler(onMessageCreate)
 
 	if err = session.Open(); err != nil {
@@ -37,6 +38,11 @@ func main() {
 	<-loopch
 	<-sc
 	return
+}
+
+func onReady(session *discordgo.Session, event *discordgo.Ready) {
+	fmt.Printf("Name\t: %s\n", event.User.Username)
+	fmt.Printf("ID\t: %s\n", event.User.ID)
 }
 
 func onMessageCreate(session *discordgo.Session, event *discordgo.MessageCreate) {
