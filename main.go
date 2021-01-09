@@ -6,6 +6,7 @@ import (
 	"os"
 	"os/signal"
 	"syscall"
+	"time"
 
 	"github.com/bwmarrin/discordgo"
 )
@@ -27,11 +28,13 @@ func main() {
 	}
 	defer session.Close()
 
+	loopch := make(chan bool)
+	go loop(1*time.Minute, loopch)
+
 	sc := make(chan os.Signal, 1)
 	signal.Notify(sc, syscall.SIGINT, syscall.SIGTERM, os.Interrupt, os.Kill)
 
-	fmt.Println("booted!!!")
-
+	<-loopch
 	<-sc
 	return
 }
@@ -58,4 +61,11 @@ func loadToken() string {
 		panic("no discord token exists.")
 	}
 	return "Bot " + token
+}
+
+func loop(d time.Duration, ch chan bool) {
+	for {
+		time.Sleep(d)
+		fmt.Println("hello")
+	}
 }
