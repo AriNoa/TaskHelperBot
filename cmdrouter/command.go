@@ -8,5 +8,5 @@ type Command struct {
 	Usage       string
 	Example     string
 	SubCommands []*Command
-	Handler     *CommandHandler
+	Handler     CommandHandler
 }
