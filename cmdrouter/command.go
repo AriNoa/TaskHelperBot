@@ -7,6 +7,33 @@ type Command struct {
 	Summary     string
 	Usage       string
 	Example     string
-	SubCommands []*Command
+	SubCommands map[string]*Command
 	Handler     CommandHandler
+}
+
+// NewCommand is a constructor for Command
+func NewCommand(
+	name string,
+	alias string,
+	summary string,
+	usage string,
+	example string,
+	subCommands []*Command,
+	handler CommandHandler,
+) *Command {
+	subCommandMap := map[string]*Command{}
+
+	for _, c := range subCommands {
+		subCommandMap[c.Alias] = c
+	}
+
+	return &Command{
+		name,
+		alias,
+		summary,
+		usage,
+		example,
+		subCommandMap,
+		handler,
+	}
 }
