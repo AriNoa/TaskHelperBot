@@ -8,5 +8,16 @@ type RouteHandler struct {
 
 // Handle of RouteHandler calls the subcommand handle according to Argument
 func (rh *RouteHandler) Handle(ctx *Context) {
-	return
+	cmd, arg := DetachCommandFrom(ctx.Argument)
+
+	if c, ok := rh.Command.SubCommands[cmd]; ok {
+
+		ctx.Argument = arg
+
+		c.Handler.Handle(ctx)
+
+		return
+	}
+
+	rh.HelpPresenter.Help(rh.Command)
 }
