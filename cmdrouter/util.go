@@ -11,3 +11,8 @@ func DetachCommandFrom(str string) (command string, argument string) {
 
 	return
 }
+
+// MakeCommandMapFrom function make the map from the command slice with the command alias as the key.
+func MakeCommandMapFrom(commands []*Command) map[string]*Command {
+	return map[string]*Command{}
+}
