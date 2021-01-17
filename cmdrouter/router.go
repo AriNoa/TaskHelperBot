@@ -16,7 +16,7 @@ func NewRouter(prefix string, commands []*Command) *Router {
 	}
 }
 
-// Handler is a router handler provided to discordgo session
-func (r *Router) route(ctx *Context) {
+// Route is a router handler provided to discordgo session
+func (r *Router) Route(ctx *Context) {
 	//TODO
 }

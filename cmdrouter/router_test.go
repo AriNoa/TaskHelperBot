@@ -44,7 +44,7 @@ func createTestRouter() (
 func TestCommandRouteNotCommand(t *testing.T) {
 	r, a, b := createTestRouter()
 
-	r.route(&Context{
+	r.Route(&Context{
 		"abc",
 		map[string]interface{}{},
 	})
@@ -56,7 +56,7 @@ func TestCommandRouteNotCommand(t *testing.T) {
 func TestCommandRouteCommand(t *testing.T) {
 	r, a, b := createTestRouter()
 
-	r.route(&Context{
+	r.Route(&Context{
 		"!a",
 		map[string]interface{}{},
 	})
