@@ -2,14 +2,18 @@ package main
 
 import (
 	"fmt"
-	"log"
 	"os"
 	"os/signal"
 	"syscall"
 	"time"
 
 	"github.com/bwmarrin/discordgo"
+
+	cmdr "TaskHelperBot/cmdrouter"
+	cmds "TaskHelperBot/commands"
 )
+
+var router cmdr.Router
 
 func main() {
 	session, err := discordgo.New()
@@ -23,6 +27,21 @@ func main() {
 
 	session.AddHandler(onReady)
 	session.AddHandler(onMessageCreate)
+
+	router = *cmdr.NewRouter(
+		"!",
+		[]*cmdr.Command{
+			cmdr.NewCommand(
+				"PingPong",
+				"ping",
+				"",
+				"",
+				"",
+				[]*cmdr.Command{},
+				&cmds.PingPongHandler{},
+			),
+		},
+	)
 
 	if err = session.Open(); err != nil {
 		panic(err)
@@ -50,15 +69,17 @@ func onMessageCreate(session *discordgo.Session, event *discordgo.MessageCreate)
 		return
 	}
 
-	if event.Content != "ping" {
-		return
+	props := map[string]interface{}{
+		"session": session,
+		"event":   event,
 	}
 
-	_, Err := session.ChannelMessageSend(event.ChannelID, "pong")
-	if Err != nil {
-		log.Println("failed send message: ", Err)
+	ctx := cmdr.Context{
+		Argument: event.Content,
+		Props:    props,
 	}
-	return
+
+	router.Route(&ctx)
 }
 
 func loadToken() string {
