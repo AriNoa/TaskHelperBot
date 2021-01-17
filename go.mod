@@ -1,4 +1,4 @@
-module TaskHelperBot-Go
+module TaskHelperBot
 
 go 1.15
 
