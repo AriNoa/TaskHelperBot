@@ -21,11 +21,7 @@ func NewCommand(
 	subCommands []*Command,
 	handler CommandHandler,
 ) *Command {
-	subCommandMap := map[string]*Command{}
-
-	for _, c := range subCommands {
-		subCommandMap[c.Alias] = c
-	}
+	subCommandMap := MakeCommandMapFrom(subCommands)
 
 	return &Command{
 		name,
