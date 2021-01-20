@@ -1,6 +1,11 @@
 package discorddb
 
-import "github.com/bwmarrin/discordgo"
+import (
+	"encoding/json"
+	"errors"
+
+	"github.com/bwmarrin/discordgo"
+)
 
 // DataBase is a struct for using Discord as a database
 type DataBase struct {
@@ -34,4 +39,24 @@ func New(s *discordgo.Session, channelID string) (*DataBase, error) {
 	}
 
 	return &DataBase{s, tables, channelID}, nil
+}
+
+// Create creates a new table
+func (db *DataBase) Create(key string) error {
+	if _, ok := db.Tables[key]; ok {
+		return errors.New("the table has already been created")
+	}
+
+	data, err := json.Marshal(map[string]interface{}{key: nil})
+	if err != nil {
+		return err
+	}
+
+	m, err := db.Session.ChannelMessageSend(db.ChannelID, string(data))
+	if err != nil {
+		return err
+	}
+
+	db.Tables[key] = Table{data, m.ID}
+	return nil
 }
