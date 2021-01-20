@@ -9,7 +9,7 @@ type Table struct {
 }
 
 // NewTable is a constructor for Router
-func (t *Table) NewTable(value interface{}, messageID string) (*Table, error) {
+func NewTable(value interface{}, messageID string) (*Table, error) {
 	json, err := json.Marshal((value))
 
 	if err != nil {
