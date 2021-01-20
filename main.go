@@ -13,6 +13,9 @@ import (
 	cmds "TaskHelperBot/commands"
 )
 
+// LoopInterval is the interval at which the loopEvent function is called
+const LoopInterval = time.Minute
+
 var router cmdr.Router
 
 func main() {
@@ -48,13 +51,16 @@ func main() {
 	}
 	defer session.Close()
 
-	loopch := make(chan bool)
-	go loop(1*time.Minute, loopch)
-
 	sc := make(chan os.Signal, 1)
 	signal.Notify(sc, syscall.SIGINT, syscall.SIGTERM, os.Interrupt, os.Kill)
 
-	<-loopch
+	go func() {
+		for {
+			time.Sleep(LoopInterval)
+			loopEvent()
+		}
+	}()
+
 	<-sc
 	return
 }
@@ -90,9 +96,6 @@ func loadToken() string {
 	return "Bot " + token
 }
 
-func loop(d time.Duration, ch chan bool) {
-	for {
-		time.Sleep(d)
-		fmt.Println("hello")
-	}
+func loopEvent() {
+	// TODO
 }
