@@ -7,10 +7,8 @@ import (
 	"syscall"
 	"time"
 
+	cmdr "github.com/AriNoa/CommandRouter-Go"
 	"github.com/bwmarrin/discordgo"
-
-	cmdr "TaskHelperBot/cmdrouter"
-	cmds "TaskHelperBot/commands"
 )
 
 // LoopInterval is the interval at which the loopEvent function is called
@@ -41,7 +39,7 @@ func main() {
 				"",
 				"",
 				[]*cmdr.Command{},
-				&cmds.PingPongHandler{},
+				nil, // TODO
 			),
 		},
 	)
