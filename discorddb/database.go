@@ -91,7 +91,7 @@ func (db *DataBase) Read(key string) (interface{}, bool) {
 	return nil, false
 }
 
-// Update updates the value corresponding to the key
+// Update updates the table
 func (db *DataBase) Update(key string, value interface{}) error {
 	t, ok := db.Tables[key]
 
@@ -102,4 +102,22 @@ func (db *DataBase) Update(key string, value interface{}) error {
 	t.Value = value
 
 	return db.Save(key)
+}
+
+// Delete deletes the table
+func (db *DataBase) Delete(key string) error {
+	t, ok := db.Tables[key]
+
+	if !ok {
+		return errors.New("not found the key")
+	}
+
+	err := db.Session.ChannelMessageDelete(db.ChannelID, t.MessageID)
+	if err != nil {
+		return err
+	}
+
+	delete(db.Tables, key)
+
+	return nil
 }
