@@ -90,3 +90,16 @@ func (db *DataBase) Read(key string) (interface{}, bool) {
 
 	return nil, false
 }
+
+// Update updates the value corresponding to the key
+func (db *DataBase) Update(key string, value interface{}) error {
+	t, ok := db.Tables[key]
+
+	if !ok {
+		return errors.New("not found the key")
+	}
+
+	t.Value = value
+
+	return db.Save(key)
+}
