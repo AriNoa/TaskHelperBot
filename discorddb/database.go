@@ -48,7 +48,12 @@ func (db *DataBase) Save(key string) error {
 		return errors.New("not found the key")
 	}
 
-	data, err := json.Marshal(t.Value)
+	hash := map[string]interface{}{
+		"key":   key,
+		"value": t.Value,
+	}
+
+	data, err := json.Marshal(hash)
 	if err != nil {
 		return err
 	}
@@ -68,7 +73,10 @@ func (db *DataBase) Create(key string) error {
 		return errors.New("the table has already been created")
 	}
 
-	data, err := json.Marshal(map[string]interface{}{key: nil})
+	data, err := json.Marshal(map[string]interface{}{
+		"key":   key,
+		"value": nil,
+	})
 	if err != nil {
 		return err
 	}
