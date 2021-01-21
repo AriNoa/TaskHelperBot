@@ -10,13 +10,13 @@ import (
 // DataBase is a struct for using Discord as a database
 type DataBase struct {
 	Session   *discordgo.Session
-	Tables    map[string]Table
+	Tables    map[string]*Table
 	ChannelID string
 }
 
 // New is a constructor for DataBase
 func New(s *discordgo.Session, channelID string) (*DataBase, error) {
-	tables := map[string]Table{}
+	tables := map[string]*Table{}
 
 	msgs, err := s.ChannelMessages(channelID, 100, "", "", "")
 
@@ -35,7 +35,7 @@ func New(s *discordgo.Session, channelID string) (*DataBase, error) {
 			DeleteMessageWithLog(s, channelID, oldTable.MessageID)
 		}
 
-		tables[key] = *table
+		tables[key] = table
 	}
 
 	return &DataBase{s, tables, channelID}, nil
@@ -78,7 +78,7 @@ func (db *DataBase) Create(key string) error {
 		return err
 	}
 
-	db.Tables[key] = Table{nil, m.ID}
+	db.Tables[key] = &Table{nil, m.ID}
 	return nil
 }
 
