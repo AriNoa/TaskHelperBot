@@ -41,6 +41,27 @@ func New(s *discordgo.Session, channelID string) (*DataBase, error) {
 	return &DataBase{s, tables, channelID}, nil
 }
 
+// Save saves the table corresponding to the key in DataBase
+func (db *DataBase) Save(key string) error {
+	t, ok := db.Tables[key]
+	if !ok {
+		return errors.New("not found the key")
+	}
+
+	data, err := json.Marshal(t.Value)
+	if err != nil {
+		return err
+	}
+
+	db.Session.ChannelMessageEdit(
+		db.ChannelID,
+		t.MessageID,
+		string(data),
+	)
+
+	return nil
+}
+
 // Create creates a new table
 func (db *DataBase) Create(key string) error {
 	if _, ok := db.Tables[key]; ok {
