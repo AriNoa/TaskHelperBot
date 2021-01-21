@@ -57,6 +57,6 @@ func (db *DataBase) Create(key string) error {
 		return err
 	}
 
-	db.Tables[key] = Table{data, m.ID}
+	db.Tables[key] = Table{nil, m.ID}
 	return nil
 }

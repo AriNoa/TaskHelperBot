@@ -46,10 +46,10 @@ func CreateTableFromMessage(s *discordgo.Session, m *discordgo.Message) (string,
 		return "", nil, errors.New("message does not have \"value\"")
 	}
 
-	t, err := NewTable(value, m.ID)
+	t := Table{value, m.ID}
 	if err != nil {
 		return "", nil, err
 	}
 
-	return key, t, nil
+	return key, &t, nil
 }
