@@ -81,3 +81,12 @@ func (db *DataBase) Create(key string) error {
 	db.Tables[key] = Table{nil, m.ID}
 	return nil
 }
+
+// Read reads the value from the Key
+func (db *DataBase) Read(key string) (interface{}, bool) {
+	if t, ok := db.Tables[key]; ok {
+		return t.Value, true
+	}
+
+	return nil, false
+}
