@@ -3,7 +3,6 @@ module TaskHelperBot
 go 1.15
 
 require (
-	github.com/AriNoa/CommandRouter-Go v0.0.0-20210121231618-b83cd8b0a55d
+	github.com/AriNoa/CommandRouterGo v0.0.0-20210124065609-5110e23e8355
 	github.com/bwmarrin/discordgo v0.22.0
-	github.com/stretchr/testify v1.7.0
 )

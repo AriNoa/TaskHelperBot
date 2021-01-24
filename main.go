@@ -7,7 +7,7 @@ import (
 	"syscall"
 	"time"
 
-	cmdr "github.com/AriNoa/CommandRouter-Go"
+	cmdr "github.com/AriNoa/CommandRouterGo"
 	"github.com/bwmarrin/discordgo"
 )
 
