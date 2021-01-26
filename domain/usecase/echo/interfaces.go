@@ -1,11 +1,11 @@
 package echo
 
-// Handler is an interface for echo
-type Handler interface {
-	Handle(contents string)
+// UseCase is an interface for echo
+type UseCase interface {
+	Echo(contents string)
 }
 
 // Presenter is an interface for echo the same contents
 type Presenter interface {
-	echo(contents string)
+	Echo(contents string)
 }
