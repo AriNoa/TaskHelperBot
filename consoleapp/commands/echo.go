@@ -11,6 +11,7 @@ import (
 // EchoPresenter is a struct that implements echo.Presenter interface
 type EchoPresenter struct{}
 
+// Echo is a method that implements echo.Presenter's Echo method
 func (p *EchoPresenter) Echo(contents string) {
 	fmt.Printf("%s\n", contents)
 }
