@@ -4,11 +4,15 @@ import (
 	"bufio"
 	"fmt"
 	"os"
+
+	cmdr "github.com/AriNoa/CommandRouterGo"
 )
 
 // Run is a function to run DiscordBot
 func Run() {
 	fmt.Println("Welcome to ConsoleApp")
+
+	r := newRouter()
 
 	scanner := bufio.NewScanner(os.Stdin)
 	for scanner.Scan() {
@@ -18,9 +22,12 @@ func Run() {
 			break
 		}
 
-		// TODO
+		ctx := cmdr.Context{
+			Argument: txt,
+			Props:    map[string]interface{}{},
+		}
 
-		fmt.Printf("[%s]\n", txt)
+		r.Route(&ctx)
 	}
 
 	fmt.Println("See you next time")
