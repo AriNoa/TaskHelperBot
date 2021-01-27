@@ -1,9 +1,11 @@
 package main
 
 import (
+	"TaskHelperBot/consoleapp"
 	"TaskHelperBot/discordbot"
 )
 
 func main() {
-	discordbot.Run()
+	go discordbot.Run()
+	consoleapp.Run()
 }
