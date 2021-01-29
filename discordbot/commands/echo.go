@@ -24,8 +24,10 @@ func (p *EchoPresenter) Echo(contents string) {
 
 // EchoHandler is a struct that implements CommandHandler interface
 type EchoHandler struct {
-	UseCase   echo.UseCase
-	Presenter *EchoPresenter
+	Command       *cmdr.Command
+	UseCase       echo.UseCase
+	Presenter     *EchoPresenter
+	HelpPresenter cmdr.CommandHelpPresenter
 }
 
 // Handle is a method that implements CommandHandler's Handle method
@@ -38,6 +40,10 @@ func (eh *EchoHandler) Handle(ctx *cmdr.Context) {
 	e, err := FindEventFrom(ctx.Props)
 	if err != nil {
 		log.Fatal(err)
+	}
+
+	if ctx.Argument == "" {
+		eh.HelpPresenter.Help(eh.Command, ctx.Props)
 	}
 
 	eh.Presenter.Session = s
