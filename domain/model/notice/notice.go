@@ -1,6 +1,9 @@
 package notice
 
-import "time"
+import (
+	"errors"
+	"time"
+)
 
 // Notice is a structure that expresses a notification
 type Notice struct {
@@ -12,4 +15,15 @@ type Notice struct {
 		hasValue bool
 	}
 	Enabled bool
+}
+
+// UpdateNextNoticeTime updates the next notification time from the Repeat value
+func (n *Notice) UpdateNextNoticeTime() error {
+	if !n.Repeat.hasValue {
+		return errors.New("Notice's repeat has not value")
+	}
+
+	n.Next.Add(n.Repeat.value)
+
+	return nil
 }
