@@ -50,7 +50,7 @@ func (n *Notice) UpdateNextNoticeTime() error {
 		return errors.New("Notice's repeat has not value")
 	}
 
-	n.Next.Add(n.Repeat.value)
+	n.Next = n.Next.Add(n.Repeat.value)
 
 	return nil
 }
