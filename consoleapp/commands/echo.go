@@ -5,7 +5,7 @@ import (
 
 	cmdr "github.com/AriNoa/CommandRouterGo"
 
-	"TaskHelperBot/domain/usecase/echo"
+	echo "TaskHelperBot/domain/echo/usecase"
 )
 
 // EchoPresenter is a struct that implements echo.Presenter interface

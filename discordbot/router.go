@@ -4,7 +4,7 @@ import (
 	cmdr "github.com/AriNoa/CommandRouterGo"
 
 	"TaskHelperBot/discordbot/commands"
-	"TaskHelperBot/domain/usecase/echo"
+	echo "TaskHelperBot/domain/echo/usecase"
 )
 
 func newEchoCommand() *cmdr.Command {
