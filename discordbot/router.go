@@ -3,8 +3,8 @@ package discordbot
 import (
 	cmdr "github.com/AriNoa/CommandRouterGo"
 
-	"TaskHelperBot/discordbot/commands"
-	echo "TaskHelperBot/domain/echo/usecase"
+	"github.com/AriNoa/TaskHelperBot/discordbot/commands"
+	echo "github.com/AriNoa/TaskHelperBot/domain/echo/usecase"
 )
 
 func newEchoCommand() *cmdr.Command {

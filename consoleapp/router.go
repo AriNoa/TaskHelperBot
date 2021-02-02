@@ -3,8 +3,8 @@ package consoleapp
 import (
 	cmdr "github.com/AriNoa/CommandRouterGo"
 
-	"TaskHelperBot/consoleapp/commands"
-	echo "TaskHelperBot/domain/echo/usecase"
+	"github.com/AriNoa/TaskHelperBot/consoleapp/commands"
+	echo "github.com/AriNoa/TaskHelperBot/domain/echo/usecase"
 )
 
 func newRouter() *cmdr.Router {

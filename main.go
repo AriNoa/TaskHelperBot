@@ -1,8 +1,8 @@
 package main
 
 import (
-	"TaskHelperBot/consoleapp"
-	"TaskHelperBot/discordbot"
+	"github.com/AriNoa/TaskHelperBot/consoleapp"
+	"github.com/AriNoa/TaskHelperBot/discordbot"
 )
 
 func main() {

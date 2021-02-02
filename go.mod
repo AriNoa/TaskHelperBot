@@ -1,4 +1,4 @@
-module TaskHelperBot
+module github.com/AriNoa/TaskHelperBot
 
 go 1.15
 
