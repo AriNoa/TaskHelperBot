@@ -2,6 +2,8 @@ package usecase
 
 import (
 	"time"
+
+	model "github.com/AriNoa/TaskHelperBot/domain/notice/model"
 )
 
 // UseCase is an interface for notice
@@ -26,4 +28,14 @@ type UseCase interface {
 	TableList(userID string)
 	NoticeList(userID string, tableID string)
 	Info(userID string, tableID string, noticeID int)
+}
+
+// Presenter is an interface to tell the notice user
+type Presenter interface {
+	Complete(event string)
+	Error(event string, contents string)
+
+	DrawTableList(user model.User)
+	DrawNoticeList(table model.Table)
+	DrawNoticeInfo(notice model.Notice)
 }
